@@ -7,6 +7,15 @@ public class Wave : MonoBehaviour
     public GameObject[] alienType;
     public float spaceColumns = 2f, spaceRow = 2f;
     public int TotalAlienInLine = 6;
+    public bool canMove = true;
+    public bool walkRight = true;
+    public float waveStepRight = 1f, waveStepDown = 1f, waveSpeed = 0.8f;
+
+    //SoundWave à ajouter peut-être
+
+    //Gestion nombre d'aliens
+    public int totalAliensInWave;
+    public int remainingAliens;
 
     private void Awake(){
         // Générateur de vague d'alien
@@ -18,6 +27,32 @@ public class Wave : MonoBehaviour
                 Go.transform.SetParent(this.transform);
                 Go.name = "Alien" + (j+1) + "-row:" + (i+1);
             }
+        }
+        //Assignation du nombre d'aliens
+        totalAliensInWave = transform.childCount;
+        remainingAliens = totalAliensInWave;
+    }
+    private void Start(){
+        StartCoroutine(moveWave());
+    }
+    IEnumerator moveWave(){
+        while(canMove){
+            isWaveEmpty();
+            Vector2 direction = walkRight ? Vector2.right : Vector2.left;
+            transform.Translate(direction * waveStepRight);
+            BroadcastMessage("animateAlien");
+            yield return new WaitForSeconds(waveSpeed);
+        }
+    }
+    public void waveTouchBumper(){
+        walkRight = !walkRight;
+        transform.Translate(Vector2.down * waveStepDown);
+    }
+
+    void isWaveEmpty(){
+        if(remainingAliens==0){
+            print("Won this level");
+            StopAllCoroutines();
         }
     }
 }

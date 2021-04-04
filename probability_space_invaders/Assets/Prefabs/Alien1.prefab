@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5574723798482228630}
   - component: {fileID: 5574723798482228631}
   - component: {fileID: 5574723798482228624}
+  - component: {fileID: 5678891100100217857}
   m_Layer: 0
   m_Name: Alien1
   m_TagString: Alien
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5574723798482228625}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.3962975, y: 3.8128417, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -131,3 +132,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5678891100100217857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5574723798482228625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 386a2712867a2da40918364b60374d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite2: {fileID: 5010769443706719163, guid: bdd283e4f50db7e49abd1c73e1129b47, type: 3}

@@ -6,10 +6,14 @@ public class BulletPlayer : MonoBehaviour
 {
     public float force = 600f, destroyTime = 1f;
     Rigidbody2D rb;
+    public GameObject ExplosionPrefab;
+    private PlayerController playerController;
+
     // Start is called before the first frame update
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -21,6 +25,16 @@ public class BulletPlayer : MonoBehaviour
     }
 
     private void OnDestroy(){
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().canShoot = true;
+        playerController.canShoot = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision){
+        if(collision.gameObject.CompareTag("Alien")){
+            Destroy(collision.gameObject);
+            Instantiate(ExplosionPrefab, collision.transform.position, Quaternion.identity);
+            playerController.Score += 50; // FAIRE ALÉATOIRE
+            Destroy(this.gameObject);
+
+        }
     }
 }

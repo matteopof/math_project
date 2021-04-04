@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1898553734845468512}
   - component: {fileID: 6501124408877586166}
   - component: {fileID: 5038117423314199880}
+  - component: {fileID: -6017449313332787100}
   m_Layer: 0
   m_Name: Alien4
   m_TagString: Alien
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4149225556968429452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.6408553, y: 2.1440582, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4758746201544503334, guid: bdd283e4f50db7e49abd1c73e1129b47,
+  m_Sprite: {fileID: -3479692415472800309, guid: bdd283e4f50db7e49abd1c73e1129b47,
     type: 3}
   m_Color: {r: 0.25943398, g: 1, b: 0.4625729, a: 1}
   m_FlipX: 0
@@ -101,7 +102,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.7, y: 0.6}
+    oldSize: {x: 0.8, y: 0.8}
     newSize: {x: 0.7, y: 0.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -131,3 +132,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-6017449313332787100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4149225556968429452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 386a2712867a2da40918364b60374d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite2: {fileID: -4529987422154308296, guid: bdd283e4f50db7e49abd1c73e1129b47,
+    type: 3}
