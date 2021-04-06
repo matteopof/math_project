@@ -50,7 +50,7 @@ public class Wave : MonoBehaviour
             isWaveEmpty();
             Vector2 direction = walkRight ? Vector2.right : Vector2.left;
             transform.Translate(direction * waveStepRight);
-            BroadcastMessage("animateAlien");
+            BroadcastMessage("animateAlien", SendMessageOptions.DontRequireReceiver);
             yield return new WaitForSeconds(waveSpeed);
         }
     }
@@ -62,6 +62,7 @@ public class Wave : MonoBehaviour
     void isWaveEmpty(){
         if(remainingAliens==0){
             print("Won this level");
+            GameObject.Find("SpawnPointUfo").GetComponent<SpawnUfo>().ufoStopSpawn();
             StopAllCoroutines();
         }
     }

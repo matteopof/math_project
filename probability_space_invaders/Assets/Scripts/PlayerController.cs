@@ -50,11 +50,9 @@ public class PlayerController : MonoBehaviour
     }
 
     void movePlayer(){
-        if(canShoot){
-            positionPlayer.x += Input.GetAxis("Horizontal") * Time.deltaTime * speed;
-            positionPlayer.x = Mathf.Clamp(positionPlayer.x, -limitX, limitX);
-            transform.position = positionPlayer;
-        }
+        positionPlayer.x += Input.GetAxis("Horizontal") * Time.deltaTime * speed;
+        positionPlayer.x = Mathf.Clamp(positionPlayer.x, -limitX, limitX);
+        transform.position = positionPlayer;
     }
 
     void playerShoot(){

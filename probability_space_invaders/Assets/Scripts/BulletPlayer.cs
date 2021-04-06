@@ -34,6 +34,14 @@ public class BulletPlayer : MonoBehaviour
             Instantiate(ExplosionPrefab, collision.transform.position, Quaternion.identity);
             playerController.Score += 50; // FAIRE ALÉATOIRE
             Destroy(this.gameObject);
+        }
+
+        if(collision.gameObject.CompareTag("Ufo")){
+            Destroy(collision.gameObject);
+            Instantiate(ExplosionPrefab, collision.transform.position, Quaternion.identity);
+            GameObject.Find("Wave").GetComponent<Wave>().remainingAliens += 1;
+            playerController.Score += 200; // FAIRE ALÉATOIRE
+            Destroy(this.gameObject);
 
         }
     }
