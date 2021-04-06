@@ -37,4 +37,15 @@ public class BulletPlayer : MonoBehaviour
 
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision){
+        if(collision.gameObject.CompareTag("BulletAlien")){
+            Destroy(collision.gameObject);
+            playerController.Score += 10; // Aléatoire
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+
+
+        }
+    }
 }

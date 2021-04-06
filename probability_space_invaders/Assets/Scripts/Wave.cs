@@ -17,6 +17,11 @@ public class Wave : MonoBehaviour
     public int totalAliensInWave;
     public int remainingAliens;
 
+    //Redemarrage vague
+    Vector2 positionInitialWave;
+    PlayerController playerController;
+
+    
     private void Awake(){
         // Générateur de vague d'alien
         for(int i = 0; i<alienType.Length; i++){
@@ -31,6 +36,11 @@ public class Wave : MonoBehaviour
         //Assignation du nombre d'aliens
         totalAliensInWave = transform.childCount;
         remainingAliens = totalAliensInWave;
+        
+        //Position initiale
+        positionInitialWave = transform.position;
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+   
     }
     private void Start(){
         StartCoroutine(moveWave());
@@ -54,5 +64,20 @@ public class Wave : MonoBehaviour
             print("Won this level");
             StopAllCoroutines();
         }
+    }
+
+    public void stopWave(){
+        StopAllCoroutines();
+    } 
+
+    public void restartWave(float delay){
+        StartCoroutine(restart(delay));
+    }
+
+    IEnumerator restart(float delay){
+        yield return new WaitForSeconds(delay);
+        transform.position = positionInitialWave;
+        StartCoroutine(moveWave());
+        playerController.initPlayer();
     }
 }
