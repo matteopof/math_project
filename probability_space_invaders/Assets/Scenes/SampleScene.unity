@@ -365,9 +365,13 @@ MonoBehaviour:
   - {fileID: 4208293265742048377, guid: 4d076053ea6040741a15749b09df0691, type: 3}
   - {fileID: 3517511697968459008, guid: bae1f8439a449824080bd74a0b588d69, type: 3}
   - {fileID: 4149225556968429452, guid: 2867fd11f085c0d458c048cb36dbb4c7, type: 3}
+  - {fileID: 8397453237531744849, guid: c03433f8c2a952c468acd2e42269b2dc, type: 3}
+  - {fileID: 5478148968164862487, guid: eb7f8a080561969449bec759a01b5bf0, type: 3}
+  - {fileID: 2184279120706106534, guid: 8a248a5a32a522142ac73c4009f4076c, type: 3}
+  - {fileID: 6672389149308261814, guid: 02316cb17c1187a46b270cee942be12f, type: 3}
   spaceColumns: 1
   spaceRow: 0.7
-  TotalAlienInLine: 2
+  totalAliensInLine: 6
   canMove: 1
   walkRight: 1
   waveStepRight: 0.5
