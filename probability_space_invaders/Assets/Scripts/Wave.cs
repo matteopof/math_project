@@ -7,6 +7,7 @@ public class Wave : MonoBehaviour
     public GameObject[] alienType;
     public float spaceColumns = 2f, spaceRow = 2f;
     public int totalAliensInLine = 6;
+    public int totalColums = 4;
     public bool canMove = true;
     public bool walkRight = true;
     public float waveStepRight = 1f, waveStepDown = 1f, waveSpeed = 0.8f;
@@ -16,19 +17,57 @@ public class Wave : MonoBehaviour
     //Gestion nombre d'aliens
     public int totalAliensInWave;
     public int remainingAliens;
+    public int numberOfTypes = 8;
 
     //Redemarrage vague
     Vector2 positionInitialWave;
     PlayerController playerController;
 
+    private int uniformLaw(){
+        float sum = 0;
+        float[] p = new float[numberOfTypes];
+        print(p.Length);
+        for(int i = 0; i<p.Length; i++){
+            p[i] = (float)1/numberOfTypes;
+            print("p"+i +"="+ p[i]);
+            sum += p[i];
+        }
+        print("sum" + sum);
+
+        // Random between 0 and 1
+        double randomNumber = (double)UnityEngine.Random.Range(0f, 1f);
+
+        print("Random number " + randomNumber);
+
+        int indexNumber = 0;
+        double min = 0;
+        double max = p[0];
+
+        for (int i = 0; i<=numberOfTypes-2; i++)
+        {
+            if (randomNumber >= min && randomNumber <= max)
+            {
+                indexNumber = i;
+            }
+            min += p[i];
+            max += p[i + 1];
+        }
+        if (randomNumber >= min && randomNumber <= max)
+        {
+            indexNumber = numberOfTypes-1;
+        }
+        print("L'indexe renvoyé est : " + indexNumber);
+        return indexNumber;
+    }
+    
     
     private void Awake(){
         // Générateur de vague d'alien
-        for(int i = 0; i<alienType.Length; i++){
+        for(int i = 0; i<totalColums; i++){
             float posY = transform.position.y - (spaceRow * i);
             for( int j = 0; j<totalAliensInLine; j++){
                 Vector2 pos = new Vector2(transform.position.x + spaceColumns * j, posY);
-                GameObject Go = Instantiate(alienType[i].gameObject, pos, Quaternion.identity);
+                GameObject Go = Instantiate(alienType[uniformLaw()].gameObject, pos, Quaternion.identity);
                 Go.transform.SetParent(this.transform);
                 Go.name = "Alien" + (j+1) + "-row:" + (i+1);
             }
@@ -89,11 +128,11 @@ public class Wave : MonoBehaviour
         if(totalAliensInLine<16) totalAliensInLine += 1;
 
         // Générateur de vague d'alien
-        for(int i = 0; i<alienType.Length; i++){
+        for(int i = 0; i<totalColums; i++){
             float posY = transform.position.y - (spaceRow * i);
             for( int j = 0; j<totalAliensInLine; j++){
                 Vector2 pos = new Vector2(transform.position.x + spaceColumns * j, posY);
-                GameObject Go = Instantiate(alienType[i].gameObject, pos, Quaternion.identity);
+                GameObject Go = Instantiate(alienType[uniformLaw()].gameObject, pos, Quaternion.identity);
                 Go.transform.SetParent(this.transform);
                 Go.name = "Alien" + (j+1) + "-row:" + (i+1);
             }
