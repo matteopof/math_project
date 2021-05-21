@@ -25,20 +25,16 @@ public class SpaceshipUfo : MonoBehaviour
         //calcul du paramètre p
         double param = 0.8; // changer en fonction du score du joueur
         int score = playerController.Score;
-        print("score = " + score);
         if (score <= 2500)
         {
-            print("score <= 2500");
             param = 0.5;
         }
         if (score > 2500 && score <= 6000)
         {
-            print("score > 2500 && score <= 6000");
             param = 0.3;
         }
         if (score > 6000)
         {
-            print("score > 6000");
             param = 0.1;
         }
         // calcul des probabilités 
@@ -46,9 +42,7 @@ public class SpaceshipUfo : MonoBehaviour
         {
             proba[i] = param * System.Math.Pow((1 - param), i + 3 - 1); // p(x=k) = p(1-p)^(k-1)
         }
-        // proba[7] = 1 - (proba[0] + proba[1] + proba[2] + proba[3] + proba[4] + proba[5] + proba[6] + proba[7] + proba[8]);
 
-        // random 
         double randomNumber = (double)UnityEngine.Random.Range(0f, 1f);
         print("randomSpeed = " + randomNumber);
 

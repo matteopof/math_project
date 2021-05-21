@@ -26,18 +26,18 @@ public class Wave : MonoBehaviour
     private int uniformLaw(){
         float sum = 0;
         float[] p = new float[numberOfTypes];
-        print(p.Length);
+        //print(p.Length);
         for(int i = 0; i<p.Length; i++){
             p[i] = (float)1/numberOfTypes;
-            print("p"+i +"="+ p[i]);
+            //print("p"+i +"="+ p[i]);
             sum += p[i];
         }
-        print("sum" + sum);
+        //print("sum" + sum);
 
         // Random between 0 and 1
         double randomNumber = (double)UnityEngine.Random.Range(0f, 1f);
 
-        print("Random number " + randomNumber);
+        //print("Random number " + randomNumber);
 
         int indexNumber = 0;
         double min = 0;
@@ -56,7 +56,7 @@ public class Wave : MonoBehaviour
         {
             indexNumber = numberOfTypes-1;
         }
-        print("L'indexe renvoyé est : " + indexNumber);
+        //print("L'indexe renvoyé est : " + indexNumber);
         return indexNumber;
     }
     
