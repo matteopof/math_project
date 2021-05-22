@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
         movePlayer();
         playerShoot();
         alienShoot();
+        print("slider value " + Globals.slidervalfloat);
     }
 
     void movePlayer(){
