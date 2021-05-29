@@ -95,6 +95,10 @@ public class BulletPlayer : MonoBehaviour
             if (playerScore <= 2500)
             {
                 binomProba = binomProba + 0.2f;
+                if(binomProba > 1)
+                {
+                    binomProba = 1f;
+                }
             }
             if (playerScore > 2500 && playerScore <= 6000)
             {
@@ -103,6 +107,10 @@ public class BulletPlayer : MonoBehaviour
             if (playerScore > 6000)
             {
                 binomProba = binomProba - 0.2f;
+                if (binomProba < 0)
+                {
+                    binomProba = 0f;
+                }
             }
             float rdmBinom= UnityEngine.Random.Range(0f, 1f);
             float[] proba = binomialLaw(binomProba);
