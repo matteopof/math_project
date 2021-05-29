@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     bool alienCanShoot = true;
     int layerDefault;
     public float alienShootRate = 3f;
+    float difficulty = Globals.slidervalfloat;
 
     private int score = 0; 
     public int Score{
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour
         movePlayer();
         playerShoot();
         alienShoot();
-        print("slider value " + Globals.slidervalfloat);
+        //print("slider value " + difficulty);
     }
 
     void movePlayer(){

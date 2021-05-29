@@ -8,6 +8,7 @@ public class BulletPlayer : MonoBehaviour
     Rigidbody2D rb;
     public GameObject ExplosionPrefab;
     private PlayerController playerController;
+    float difficulty = Globals.slidervalfloat;
 
     // Start is called before the first frame update
     void Awake()
@@ -55,40 +56,53 @@ public class BulletPlayer : MonoBehaviour
     private int RandomScore()
     {
         int playerScore = playerController.Score;
-        float bernoulliProba = 0.5f;
+        float bernoulliProba = (difficulty * 0.4f) + 0.3f; //0.5f is a good value
         if (playerScore <= 2500)
         {
-            bernoulliProba = 0.2f;
+            bernoulliProba = bernoulliProba - 0.3f;
+            if(bernoulliProba < 0)
+            {
+                bernoulliProba = 0f;
+            }
         }
         if (playerScore > 2500 && playerScore <= 6000)
         {
-            bernoulliProba = 0.4f;
+            bernoulliProba = bernoulliProba - 0.1f;
+            if (bernoulliProba < 0)
+            {
+                bernoulliProba = bernoulliProba + 0f;
+            }
         }
         if (playerScore > 6000)
         {
-            bernoulliProba = 0.6f;
+            bernoulliProba = bernoulliProba + 0.1f;
+            if (bernoulliProba > 1)
+            {
+                bernoulliProba = 1f;
+            }
         }
+
         float rdmBernoulli = UnityEngine.Random.Range(0f, 1f);
         if (rdmBernoulli > bernoulliProba)
         {
-            print("player gets no bonus");
+            //print("player gets no bonus");
             int score = 50;
             return score;
         }
         else
         {
-            float binomProba = 0.5f;
+            float binomProba = (difficulty * 0.4f) + 0.3f; //0.5f is a good value
             if (playerScore <= 2500)
             {
-                binomProba = 0.7f;
+                binomProba = binomProba + 0.2f;
             }
             if (playerScore > 2500 && playerScore <= 6000)
             {
-                binomProba = 0.5f;
+                binomProba = binomProba + 0f;
             }
             if (playerScore > 6000)
             {
-                binomProba = 0.3f;
+                binomProba = binomProba - 0.2f;
             }
             float rdmBinom= UnityEngine.Random.Range(0f, 1f);
             float[] proba = binomialLaw(binomProba);
@@ -110,8 +124,12 @@ public class BulletPlayer : MonoBehaviour
             {
                 bonus = 5;
             }
+            if (rdmBinom >= max && rdmBinom <= 1)
+            {
+                bonus = 6;
+            }
             int score = 50 + (bonus * 20 - 50);
-            print("SCORE = " + score);
+            //print("SCORE = " + score + "(bonus = " + bonus +")");
             return score;
         }
     }
@@ -128,7 +146,7 @@ public class BulletPlayer : MonoBehaviour
             Destroy(collision.gameObject);
             Instantiate(ExplosionPrefab, collision.transform.position, Quaternion.identity);
             GameObject.Find("Wave").GetComponent<Wave>().remainingAliens += 1;
-            playerController.Score += 200; // FAIRE ALÉATOIRE
+            playerController.Score += 200; 
             Destroy(this.gameObject);
 
         }
@@ -137,11 +155,9 @@ public class BulletPlayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision){
         if(collision.gameObject.CompareTag("BulletAlien")){
             Destroy(collision.gameObject);
-            playerController.Score += 10; // Aléatoire
+            playerController.Score += 10; 
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
-
-
         }
     }
 }

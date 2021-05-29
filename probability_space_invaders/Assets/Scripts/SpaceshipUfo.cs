@@ -8,91 +8,86 @@ public class SpaceshipUfo : MonoBehaviour
     public float speed = 3f;
     // Start is called before the first frame update
     private PlayerController playerController;
+    float difficulty = Globals.slidervalfloat;
 
     void Awake()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
-    void Start()
+    private double[] geometricLaw(double param)
     {
         //liste des probabilités
         double[] proba = new double[8];
+        // proba[0] = p(x=1) = p(speed = 3f)
+        // proba[8] = p(x=8) = p(speed = 10f)
 
-        // proba[0] = p(speed = 3f)
-        // proba[7] = p(speed = 10f)
-
-        //calcul du paramètre p
-        double param = 0.8; // changer en fonction du score du joueur
-        int score = playerController.Score;
-        if (score <= 2500)
-        {
-            param = 0.5;
-        }
-        if (score > 2500 && score <= 6000)
-        {
-            param = 0.3;
-        }
-        if (score > 6000)
-        {
-            param = 0.1;
-        }
         // calcul des probabilités 
         for (int i = 0; i < 8; i++)
         {
-            proba[i] = param * System.Math.Pow((1 - param), i + 3 - 1); // p(x=k) = p(1-p)^(k-1)
+            proba[i] = param * System.Math.Pow((1 - param), i); // p(x=k) = p(1-p)^(k-1)
+        }
+
+        return proba;
+    }
+
+
+    private float randomSpeed()
+    {
+        double param = (double)difficulty * 0.6;
+        int score = playerController.Score;
+        if (score <= 2500)
+        {
+            param = param + 0.2;
+            if (param < 0)
+            {
+                param = 1;
+            }
+        }
+        if (score > 2500 && score <= 6000)
+        {
+            param = param + 0;
+        }
+        if (score > 6000)
+        {
+            param = param - 0.2;
+            if(param > 1)
+            {
+                param = 0;
+            }
         }
 
         double randomNumber = (double)UnityEngine.Random.Range(0f, 1f);
-        print("randomSpeed = " + randomNumber);
+        //print("randomSpeed = " + randomNumber);
+        double[] proba = geometricLaw(param);
 
-        if (randomNumber >= 0 && randomNumber < proba[0])
+        double min = 0;
+        double max = proba[0];
+
+        for (int i = 0; i <= 6; i++)
         {
-            print("speed=11f");
-            speed = 11f;
+            if(randomNumber >= min && randomNumber <= max)
+            {
+                speed = i + 3f;
+            }
+            min += proba[i];
+            max += proba[i + 1];
         }
-        if (randomNumber >= proba[0] && randomNumber < proba[0] + proba[1])
+        if (randomNumber >= min && randomNumber <= max)
         {
-            print("speed=10f");
             speed = 10f;
         }
-        if (randomNumber >= proba[0] + proba[1] && randomNumber < proba[0] + proba[1] + proba[2])
+        if (randomNumber >= max && randomNumber <= 1)
         {
-            print("speed=9f");
-            speed = 9f;
+            speed = 11f;
         }
-        if (randomNumber >= proba[0] + proba[1] + proba[2] && randomNumber < proba[0] + proba[1] + proba[2] + proba[3])
-        {
-            print("speed=8f");
-            speed = 8f;
-        }
-        if (randomNumber >= proba[0] + proba[1] + proba[2] + proba[3] && randomNumber < proba[0] + proba[1] + proba[2] + proba[3] + proba[4])
-        {
-            print("speed=7f");
-            speed = 7f;
-        }
-        if (randomNumber >= proba[0] + proba[1] + proba[2] + proba[3] + proba[4] && randomNumber < proba[0] + proba[1] + proba[2] + proba[3] + proba[4] + proba[5])
-        {
-            print("speed=6f");
-            speed = 6f;
-        }
-        if (randomNumber >= proba[0] + proba[1] + proba[2] + proba[3] + proba[4] + proba[5] && randomNumber < proba[0] + proba[1] + proba[2] + proba[3] + proba[4] + proba[5] + proba[6])
-        {
-            print("speed=5f");
-            speed = 5f;
-        }
-        if (randomNumber >= proba[0] + proba[1] + proba[2] + proba[3] + proba[4] + proba[5] + proba[6] && randomNumber < proba[0] + proba[1] + proba[2] + proba[3] + proba[4] + proba[5] + proba[6] + proba[7])
-        {
-            print("speed=4f");
-            speed = 4f;
-        }
-        if (randomNumber >= proba[0] + proba[1] + proba[2] + proba[3] + proba[4] + proba[5] + proba[6] + proba[7] && randomNumber <= 1)
-        {
-            double sum = proba[0] + proba[1] + proba[2] + proba[3] + proba[4] + proba[5] + proba[6] + proba[7];
-            print("sum = " + sum);
-            print("speed=3f");
-            speed = 3f;
-        }
+
+        //print("speed =" + speed);
+        return speed;
+    }
+    void Start()
+    {
+        speed = randomSpeed();
     }
 
     // Update is called once per frame

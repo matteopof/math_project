@@ -17,6 +17,6 @@ public class Globals : MonoBehaviour
     void Update()
     {
         slidervalfloat = sliderval.value;
-        print(slidervalfloat);
+        //print(slidervalfloat);
     }
 }
