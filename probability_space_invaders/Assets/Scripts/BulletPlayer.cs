@@ -97,7 +97,7 @@ public class BulletPlayer : MonoBehaviour
                 binomProba = binomProba + 0.2f;
                 if(binomProba > 1)
                 {
-                    binomProba = 1f;
+                    binomProba = 0.9f;
                 }
             }
             if (playerScore > 2500 && playerScore <= 6000)
@@ -109,7 +109,7 @@ public class BulletPlayer : MonoBehaviour
                 binomProba = binomProba - 0.2f;
                 if (binomProba < 0)
                 {
-                    binomProba = 0f;
+                    binomProba = 0.1f;
                 }
             }
             float rdmBinom= UnityEngine.Random.Range(0f, 1f);

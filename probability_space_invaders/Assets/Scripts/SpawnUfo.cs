@@ -95,11 +95,11 @@ public class SpawnUfo : MonoBehaviour
         //print("proba[11] = " + proba[11]);
         if (randomNumber >= min && randomNumber <= max)
         {
-            nextSpawn = 35f;
+            nextSpawn = 31f;
         }
         if (randomNumber >= max && randomNumber <= 1)
         {
-            nextSpawn = 36f;
+            nextSpawn = 32f;
         }
 
         print("nextSpawn = " + nextSpawn);

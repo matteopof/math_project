@@ -39,9 +39,9 @@ public class SpaceshipUfo : MonoBehaviour
         if (score <= 2500)
         {
             param = param + 0.2;
-            if (param < 0)
+            if (param >= 1)
             {
-                param = 1;
+                param = 0.9;
             }
         }
         if (score > 2500 && score <= 6000)
@@ -51,9 +51,9 @@ public class SpaceshipUfo : MonoBehaviour
         if (score > 6000)
         {
             param = param - 0.2;
-            if(param > 1)
+            if(param <= 0)
             {
-                param = 0;
+                param = 0.1;
             }
         }
 
