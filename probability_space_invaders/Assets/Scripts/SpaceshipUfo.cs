@@ -34,7 +34,7 @@ public class SpaceshipUfo : MonoBehaviour
 
     private float randomSpeed()
     {
-        double param = (double)difficulty * 0.6;
+        double param = (double)(1-difficulty) * 0.6;
         int score = playerController.Score;
         if (score <= 2500)
         {

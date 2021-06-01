@@ -70,7 +70,7 @@ public class BulletPlayer : MonoBehaviour
             bernoulliProba = bernoulliProba - 0.1f;
             if (bernoulliProba < 0)
             {
-                bernoulliProba = bernoulliProba + 0f;
+                bernoulliProba = bernoulliProba + 0.1f;
             }
         }
         if (playerScore > 6000)

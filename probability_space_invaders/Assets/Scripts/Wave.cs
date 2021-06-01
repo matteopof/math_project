@@ -10,7 +10,7 @@ public class Wave : MonoBehaviour
     public int totalColums = 4;
     public bool canMove = true;
     public bool walkRight = true;
-    public float waveStepRight = 1f, waveStepDown = 1f, waveSpeed = 0.8f;
+    public float waveStepRight = 1f, waveStepDown = 1f, waveSpeed = 0.6f;
 
     //SoundWave à ajouter peut-être
 
@@ -147,7 +147,7 @@ public class Wave : MonoBehaviour
         transform.position = positionInitialWave;
 
         //Accélération vague
-        if(waveSpeed> 0.2f) waveSpeed -= 0.1f;
+        if(waveSpeed> 0.2f) waveSpeed -= 0.2f;
 
         //Accélération cadence de tirs aliens
         if(playerController.alienShootRate > 1f) playerController.alienShootRate -= 0.1f;

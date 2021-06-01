@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public GameObject alienBullet;
     bool alienCanShoot = true;
     int layerDefault;
-    public float alienShootRate = 3f;
+    public float alienShootRate = 1f;
     float difficulty = Globals.slidervalfloat;
 
     private int score = 0; 
